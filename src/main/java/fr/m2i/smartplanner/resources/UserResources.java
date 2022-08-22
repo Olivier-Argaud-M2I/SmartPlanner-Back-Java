@@ -1,7 +1,9 @@
 package fr.m2i.smartplanner.resources;
 
 
+import fr.m2i.smartplanner.cruds.RoleCrud;
 import fr.m2i.smartplanner.cruds.UserCrud;
+import fr.m2i.smartplanner.models.Role;
 import fr.m2i.smartplanner.models.User;
 
 import javax.ws.rs.*;
@@ -27,6 +29,17 @@ public class UserResources {
         UserCrud userCrud = new UserCrud();
         return userCrud.getUsers();
     }
+
+
+    @POST
+    @Path("/save")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User saveRole(User user){
+        UserCrud userCrud = new UserCrud();
+        return userCrud.saveUser(user);
+    }
+
 
     @POST
     @Path("/log")

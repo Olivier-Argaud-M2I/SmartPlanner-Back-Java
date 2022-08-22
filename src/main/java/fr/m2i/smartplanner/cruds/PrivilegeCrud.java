@@ -2,7 +2,6 @@ package fr.m2i.smartplanner.cruds;
 
 
 import fr.m2i.smartplanner.models.Privilege;
-import fr.m2i.smartplanner.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

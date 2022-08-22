@@ -28,7 +28,7 @@ public class Role {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "privilege_id")
     )
-    private Set<Privilege> privilegeList;
+    private Set<Privilege> privileges;
 
     public Integer getId() {
         return id;
@@ -46,12 +46,12 @@ public class Role {
         this.name = name;
     }
 
-    public Set<Privilege> getPrivilegeList() {
-        return privilegeList;
+    public Set<Privilege> getPrivileges() {
+        return privileges;
     }
 
-    public void setPrivilegeList(Set<Privilege> privilegeList) {
-        this.privilegeList = privilegeList;
+    public void setPrivileges(Set<Privilege> privilegeList) {
+        this.privileges = privilegeList;
     }
 
     public Role() {
@@ -60,7 +60,7 @@ public class Role {
     public Role(Integer id, String name, Set<Privilege> privilegeList) {
         this.id = id;
         this.name = name;
-        this.privilegeList = privilegeList;
+        this.privileges = privilegeList;
     }
 
     @Override

@@ -60,26 +60,26 @@ public class UserCrud {
 
     public User saveUser(User user){
         EntityManager em = factory.createEntityManager();
-        if(user.getId()==null){
-            em.getTransaction().begin();
-            boolean valid = false;
-            try{
-                em.persist(user);
-                valid = true;
+
+        em.getTransaction().begin();
+        boolean valid = false;
+        try{
+            if(user.getId()!=null){
+                user = em.merge(user);
             }
-            finally {
-                if (valid){
-                    em.getTransaction().commit();
-                }
-                else{
-                    em.getTransaction().rollback();
-                }
+            em.persist(user);
+            valid = true;
+        }
+        finally {
+            if (valid){
+                em.getTransaction().commit();
             }
-            em.refresh(user);
+            else{
+                em.getTransaction().rollback();
+            }
         }
-        else{
-            user = em.merge(em.find(User.class,user.getId()));
-        }
+        em.refresh(user);
+
         em.close();
         return user;
     }

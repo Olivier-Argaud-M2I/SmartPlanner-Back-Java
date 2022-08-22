@@ -12,17 +12,25 @@ CREATE TABLE `user_role`(
 );
 
 
-DROP TABLE IF EXISTS `user_privilege` ;
-CREATE TABLE `user_privilege`(
-    `user_id` INTEGER   ,
-    `privilege_id` INTEGER
-);
-
-
 DROP TABLE IF EXISTS `role_privilege` ;
 CREATE TABLE `role_privilege`(
     `role_id` INTEGER   ,
     `privilege_id` INTEGER
+);
+
+
+DROP TABLE IF EXISTS `user_calendar_privilege` ;
+CREATE TABLE `user_calendar_privilege`(
+    `user_id` INTEGER   ,
+    `collaborator_id` INTEGER   ,
+    `privilege_calendar_id` INTEGER
+);
+
+
+DROP TABLE IF EXISTS `calendar_privilege` ;
+CREATE TABLE `calendar_privilege`(
+    `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+    `name` VARCHAR(20) NOT NULL
 );
 
 
@@ -32,6 +40,7 @@ CREATE TABLE `role`(
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR(20) NOT NULL
 );
+
 
 
 DROP TABLE IF EXISTS `privilege` ;
@@ -56,12 +65,14 @@ ALTER TABLE user_role ADD CONSTRAINT FK_user_user_role FOREIGN KEY (user_id) REF
 ALTER TABLE user_role ADD CONSTRAINT FK_role_user_role FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE CASCADE;
 
 
-ALTER TABLE user_privilege ADD CONSTRAINT FK_user_user_privilege FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE;
-ALTER TABLE user_privilege ADD CONSTRAINT FK_privilege_user_privilege FOREIGN KEY (privilege_id) REFERENCES privilege (id) ON DELETE CASCADE;
-
-
 ALTER TABLE role_privilege ADD CONSTRAINT FK_role_role_privilege FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE CASCADE;
 ALTER TABLE role_privilege ADD CONSTRAINT FK_privilege_role_privilege FOREIGN KEY (privilege_id) REFERENCES privilege (id) ON DELETE CASCADE;
+
+
+ALTER TABLE user_calendar_privilege ADD CONSTRAINT FK_user_user_calendar_privilege FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE;
+ALTER TABLE user_calendar_privilege ADD CONSTRAINT FK_collaborator_user_calendar_privilege FOREIGN KEY (collaborator_id) REFERENCES user (id) ON DELETE CASCADE;
+ALTER TABLE user_calendar_privilege ADD CONSTRAINT FK_privilege_calendar_user_calendar_privilege FOREIGN KEY (privilege_calendar_id) REFERENCES calendar_privilege (id) ON DELETE CASCADE;
+
 
 
 

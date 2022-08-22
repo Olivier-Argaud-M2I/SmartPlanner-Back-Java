@@ -3,7 +3,6 @@ package fr.m2i.smartplanner.models;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -45,14 +44,14 @@ public class User {
     )
     private Role role;
 
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name="user_privilege",
+            name="user_calendar_privilege",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "privilege_id")
+            inverseJoinColumns = @JoinColumn(name = "collaborator_id")
     )
-    private List<Privilege> privilegeList;
-
+    private List<User> collaborators;
 
     public Integer getId() {
         return id;
@@ -102,12 +101,12 @@ public class User {
         this.role = role;
     }
 
-    public List<Privilege> getPrivilegeList() {
-        return privilegeList;
+    public List<User> getCollaborators() {
+        return collaborators;
     }
 
-    public void setPrivilegeList(List<Privilege> privilegeList) {
-        this.privilegeList = privilegeList;
+    public void setCollaborators(List<User> collaborators) {
+        this.collaborators = collaborators;
     }
 
     public User() {
@@ -118,14 +117,14 @@ public class User {
         this.password = password;
     }
 
-    public User(Integer id, String userName, String password, String firstName, String lastName, Role role, List<Privilege> privilegeList) {
+    public User(Integer id, String userName, String password, String firstName, String lastName, Role role) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
-        this.privilegeList = privilegeList;
+
     }
 
     @Override
@@ -136,22 +135,9 @@ public class User {
                 '}';
     }
 
-    public List<String> getPrivileges(){
-        List<String> privileges = new ArrayList<>();
-        for (Privilege privilege:getRole().getPrivilegeList()) {
-            privileges.add(privilege.getName());
-        }
-//        for (Privilege privilege:getPrivilegeList()) {
-//            privileges.add(privilege);
-//        }
-        return privileges;
-    }
 
     public Boolean hasPrivilege(String privilege){
-        return getPrivileges().contains(privilege);
+        return getRole().getPrivileges().contains(privilege);
     }
 
-    public Boolean hasPrivilegeDeleteTopic(){
-        return getPrivileges().contains("deleteTopic");
-    }
 }

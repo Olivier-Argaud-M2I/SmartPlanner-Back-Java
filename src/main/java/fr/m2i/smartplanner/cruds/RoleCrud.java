@@ -37,26 +37,25 @@ public class RoleCrud {
 
     public Role saveRole(Role role){
         EntityManager em = factory.createEntityManager();
-        if(role.getId()==null){
-            em.getTransaction().begin();
-            boolean valid = false;
-            try{
-                em.persist(role);
-                valid = true;
-            }
-            finally {
-                if (valid){
-                    em.getTransaction().commit();
-                }
-                else{
-                    em.getTransaction().rollback();
-                }
-            }
-            em.refresh(role);
+        em.getTransaction().begin();
+        if(role.getId()!=null) {
+            role = em.merge(role);
         }
-        else{
-            role = em.merge(em.find(Role.class,role.getId()));
+        boolean valid = false;
+        try{
+            em.persist(role);
+            valid = true;
         }
+        finally {
+            if (valid){
+                em.getTransaction().commit();
+            }
+            else{
+                em.getTransaction().rollback();
+            }
+        }
+        em.refresh(role);
+
         em.close();
         return role;
     }
