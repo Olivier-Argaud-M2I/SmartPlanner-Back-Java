@@ -61,6 +61,19 @@ CREATE TABLE `user`(
 );
 
 
+
+DROP TABLE IF EXISTS events ;
+CREATE TABLE events(
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(20) NOT NULL ,
+    description TEXT NOT NULL ,
+    user_id INTEGER NOT NULL ,
+    date_debut_timestamp LONG NOT NULL,
+    date_fin_timestamp LONG NOT NULL
+);
+
+
+
 ALTER TABLE user_role ADD CONSTRAINT FK_user_user_role FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE;
 ALTER TABLE user_role ADD CONSTRAINT FK_role_user_role FOREIGN KEY (role_id) REFERENCES role (id) ON DELETE CASCADE;
 
@@ -73,6 +86,8 @@ ALTER TABLE user_calendar_privilege ADD CONSTRAINT FK_user_user_calendar_privile
 ALTER TABLE user_calendar_privilege ADD CONSTRAINT FK_collaborator_user_calendar_privilege FOREIGN KEY (collaborator_id) REFERENCES user (id) ON DELETE CASCADE;
 ALTER TABLE user_calendar_privilege ADD CONSTRAINT FK_privilege_calendar_user_calendar_privilege FOREIGN KEY (privilege_calendar_id) REFERENCES calendar_privilege (id) ON DELETE CASCADE;
 
+
+ALTER TABLE events ADD CONSTRAINT FK_events_user FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE;
 
 
 
