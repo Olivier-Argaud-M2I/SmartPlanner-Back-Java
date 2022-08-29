@@ -3,7 +3,9 @@ package fr.m2i.smartplanner.models;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="user")
@@ -14,7 +16,11 @@ import java.util.List;
         @NamedQuery(name="deleteUserById",query ="DELETE FROM User WHERE id = :id")
 
 })
-public class User {
+//@NamedNativeQueries({
+//        @NamedNativeQuery(name = "selectAllCollaboratorById",query = "SELECT u.* FROM user u JOIN collaborator c on u.id = c.collab_id  WHERE c.user_id=:id"),
+//        @NamedNativeQuery(name = "selectAllCollaboratorPossibleById",query = "SELECT u.* FROM user u JOIN collaborator c on u.id = c.collab_id  WHERE c.user_id!=:id")
+//})
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +42,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -45,13 +51,14 @@ public class User {
     private Role role;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name="user_calendar_privilege",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "collaborator_id")
-    )
-    private List<User> collaborators;
+//    @ManyToMany(mappedBy = "collab")
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name="collaborator_by_user",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "collab_id")
+//    )
+//    private Set<User> collaborators;
 
     public Integer getId() {
         return id;
@@ -101,13 +108,13 @@ public class User {
         this.role = role;
     }
 
-    public List<User> getCollaborators() {
-        return collaborators;
-    }
-
-    public void setCollaborators(List<User> collaborators) {
-        this.collaborators = collaborators;
-    }
+//    public Set<User> getCollaborators() {
+//        return collaborators;
+//    }
+//
+//    public void setCollaborators(Set<User> collaborators) {
+//        this.collaborators = collaborators;
+//    }
 
     public User() {
     }

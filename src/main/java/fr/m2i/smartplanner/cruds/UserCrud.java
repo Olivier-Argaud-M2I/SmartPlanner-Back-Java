@@ -21,6 +21,23 @@ public class UserCrud {
         EntityManager em = factory.createEntityManager();
         List<User> users = em.createNamedQuery("selectAllUser").getResultList();
         em.close();
+
+
+//        users.forEach(user -> {
+//            user.getCollaborators().forEach(collaborator -> {
+//                collaborator.getCollab().getUserName();
+//
+//            });
+//        });
+
+//        users.forEach(user -> {
+//            user.getCollaborators().forEach(collaborator -> {
+//                collaborator.getCalendarPrivileges();
+//
+//            });
+//        });
+
+
         return users;
     }
 
@@ -68,6 +85,7 @@ public class UserCrud {
                 user = em.merge(user);
             }
             em.persist(user);
+//            addContact(user,em);
             valid = true;
         }
         finally {
@@ -83,6 +101,17 @@ public class UserCrud {
         em.close();
         return user;
     }
+
+//    private void addContact(User user,EntityManager em){
+//        for (User contact:user.getCollaborators()) {
+//            if(contact.getCollaborators().stream().anyMatch(collabo->collabo.getId().equals(user.getId()))){
+//                return;
+//            }
+//            contact.getCollaborators().add(user);
+//            em.persist(contact);
+//        }
+//
+//    }
 
     public void deleteUser(User user){
         EntityManager em = factory.createEntityManager();
