@@ -2,7 +2,6 @@ package fr.m2i.smartplanner.models;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -34,7 +33,7 @@ public class Contact{
             joinColumns = @JoinColumn(name = "contact_id"),
             inverseJoinColumns = @JoinColumn(name = "calendar_privilege_id")
     )
-    private Set<CalendarPrivilege> CalendarPrivilege;
+    private Set<CalendarPrivilege> calendarPrivileges;
 
 
     public Integer getId() {
@@ -61,12 +60,12 @@ public class Contact{
         this.collaborator = collaborator;
     }
 
-    public Set<fr.m2i.smartplanner.models.CalendarPrivilege> getCalendarPrivilege() {
-        return CalendarPrivilege;
+    public Set<fr.m2i.smartplanner.models.CalendarPrivilege> getCalendarPrivileges() {
+        return calendarPrivileges;
     }
 
-    public void setCalendarPrivilege(Set<fr.m2i.smartplanner.models.CalendarPrivilege> calendarPrivilege) {
-        CalendarPrivilege = calendarPrivilege;
+    public void setCalendarPrivileges(Set<fr.m2i.smartplanner.models.CalendarPrivilege> calendarPrivilege) {
+        this.calendarPrivileges = calendarPrivilege;
     }
 
     public Contact() {
@@ -81,6 +80,6 @@ public class Contact{
         this.id = id;
         this.user = user;
         this.collaborator = collaborator;
-        CalendarPrivilege = calendarPrivilege;
+        this.calendarPrivileges = calendarPrivilege;
     }
 }

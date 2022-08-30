@@ -25,7 +25,7 @@ public class ContactResources {
     @GET
     @Path("/contact/{idU}/{idC}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Contact getAllContactFromUser(@PathParam("idU")int idU,@PathParam("idC")int idC){
+    public Contact getContactByIds(@PathParam("idU")int idU,@PathParam("idC")int idC){
         ContactCrud contactCrud = new ContactCrud();
         Contact contact = contactCrud.getContactByIds(idU,idC);
 
