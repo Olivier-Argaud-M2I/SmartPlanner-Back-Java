@@ -23,6 +23,19 @@ public class ContactResources {
 
 
     @GET
+    @Path("/contact/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Contact getContactById(@PathParam("id")int id){
+        ContactCrud contactCrud = new ContactCrud();
+        Contact contact = contactCrud.getContactById(id);
+
+        return contact;
+    }
+
+
+
+
+    @GET
     @Path("/contact/{idU}/{idC}")
     @Produces(MediaType.APPLICATION_JSON)
     public Contact getContactByIds(@PathParam("idU")int idU,@PathParam("idC")int idC){

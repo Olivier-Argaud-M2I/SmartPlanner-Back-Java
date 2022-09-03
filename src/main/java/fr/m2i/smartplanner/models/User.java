@@ -42,6 +42,14 @@ public class User implements Serializable {
     @Column(name = "last_name")
     private String lastName;
 
+    @Basic
+    @Column(name = "email")
+    private String email;
+
+    @Basic
+    @Column(name = "telephone")
+    private String telephone;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
@@ -50,15 +58,6 @@ public class User implements Serializable {
     )
     private Role role;
 
-
-//    @ManyToMany(mappedBy = "collab")
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name="collaborator_by_user",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "collab_id")
-//    )
-//    private Set<User> collaborators;
 
     public Integer getId() {
         return id;
@@ -108,13 +107,21 @@ public class User implements Serializable {
         this.role = role;
     }
 
-//    public Set<User> getCollaborators() {
-//        return collaborators;
-//    }
-//
-//    public void setCollaborators(Set<User> collaborators) {
-//        this.collaborators = collaborators;
-//    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
     public User() {
     }

@@ -20,31 +20,6 @@ CREATE TABLE `role_privilege`(
 
 
 
-# DROP TABLE IF EXISTS `collaborator_by_user_calendar_privilege` ;
-# CREATE TABLE `collaborator_by_user_calendar_privilege`(
-#     `collab_id` INTEGER ,
-#     `user_id` INTEGER ,
-#     `calendar_privilege_id` INTEGER
-# );
-
-
-
-# DROP TABLE IF EXISTS `user_calendar_privilege` ;
-# CREATE TABLE `user_calendar_privilege`(
-#     `user_id` INTEGER   ,
-#     `calendar_privilege_id` INTEGER
-# );
-
-
-# DROP TABLE IF EXISTS `collaborator_by_user` ;
-# CREATE TABLE `collaborator_by_user`(
-#     `user_id` INTEGER  ,
-#     `collab_id` INTEGER
-#
-# );
-
-
-
 DROP TABLE IF EXISTS `contact_calendar_privilege` ;
 CREATE TABLE `contact_calendar_privilege`(
     `contact_id` INTEGER  ,
@@ -104,5 +79,9 @@ CREATE TABLE `user`(
     `user_name` VARCHAR(20) NOT NULL ,
     `password` TEXT NOT NULL ,
     `first_name` VARCHAR(20) NOT NULL ,
-    `last_name` VARCHAR(20) NOT NULL
+    `last_name` VARCHAR(20) NOT NULL,
+    `email` VARCHAR(50) NOT NULL ,
+    `telephone` VARCHAR(20) NOT NULL
+
 );
+

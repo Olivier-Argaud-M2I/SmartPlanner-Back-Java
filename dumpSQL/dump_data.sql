@@ -1,8 +1,8 @@
 
 
-INSERT INTO user(user_name,password,first_name,last_name) VALUES ('admin','admin','admin','admin');
-INSERT INTO user(user_name,password,first_name,last_name) VALUES ('user','user','user','user');
-INSERT INTO user(user_name,password,first_name,last_name) VALUES ('visitor','visitor','visitor','visitor');
+INSERT INTO user(user_name,password,first_name,last_name,email,telephone) VALUES ('admin','admin','admin','admin','adminadmin@smartplanner.com','01 23 45 67 89');
+INSERT INTO user(user_name,password,first_name,last_name,email,telephone) VALUES ('user','user','user','user','useruser@smartplanner.com','01 23 45 67 88');
+INSERT INTO user(user_name,password,first_name,last_name,email,telephone) VALUES ('visitor','visitor','visitor','visitor','visitorvisitor@smartplanner.com','01 23 45 67 87');
 
 
 INSERT INTO privilege(name) VALUES ('crudrole');

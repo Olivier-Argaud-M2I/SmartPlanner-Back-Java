@@ -27,7 +27,7 @@ public class Contact{
     private User collaborator;
 
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="contact_calendar_privilege",
             joinColumns = @JoinColumn(name = "contact_id"),

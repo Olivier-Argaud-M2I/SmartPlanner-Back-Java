@@ -34,6 +34,21 @@ public class ContactCrud {
         return contacts;
     }
 
+
+    public Contact getContactById(Integer id){
+        Contact contact = null;
+        try{
+            EntityManager em = factory.createEntityManager();
+            contact = em.find(Contact.class,id);
+            em.close();
+        }
+        catch (Exception e){
+
+        }
+        return contact;
+    }
+
+
     public Contact getContactByIds(Integer idU,Integer idC){
         Contact contact = null;
         try{
