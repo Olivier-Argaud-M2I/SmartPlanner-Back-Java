@@ -21,9 +21,13 @@ public class UserDto {
 
     private String lastName;
 
+    private String email;
+
+    private String telephone;
+
     private Role role;
 
-    private Set<UserDto> collaborators;
+//    private Set<UserDto> collaborators;
 
     public Integer getId() {
         return id;
@@ -65,6 +69,22 @@ public class UserDto {
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -74,13 +94,13 @@ public class UserDto {
     }
 
 
-    public Set<UserDto> getCollaborators() {
-        return collaborators;
-    }
-
-    public void setCollaborators(Set<UserDto> collaborators) {
-        this.collaborators = collaborators;
-    }
+//    public Set<UserDto> getCollaborators() {
+//        return collaborators;
+//    }
+//
+//    public void setCollaborators(Set<UserDto> collaborators) {
+//        this.collaborators = collaborators;
+//    }
 
     public UserDto() {
     }
@@ -92,6 +112,8 @@ public UserDto(User user) {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.role = user.getRole();
+        this.email = user.getEmail();
+        this.telephone = user.getTelephone();
     }
 
     public UserDto fromCollaborateur(User collab) {
@@ -102,7 +124,7 @@ public UserDto(User user) {
         col.firstName = collab.getFirstName();
         col.lastName = collab.getLastName();
         col.role = collab.getRole();
-        col.setCollaborators(new HashSet<>());
+//        col.setCollaborators(new HashSet<>());
 
         return col;
     }

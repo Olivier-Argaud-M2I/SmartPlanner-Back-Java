@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="user")
@@ -151,7 +152,7 @@ public class User implements Serializable {
 
 
     public Boolean hasPrivilege(String privilege){
-        return getRole().getPrivileges().contains(privilege);
+        return getRole().getPrivileges().stream().map(priv -> priv.getName()).collect(Collectors.toList()).contains(privilege);
     }
 
 }

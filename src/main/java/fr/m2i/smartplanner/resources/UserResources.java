@@ -52,36 +52,17 @@ public class UserResources {
     }
 
 
-    @POST
-    @Path("/log")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public UserDto login(User user){
-        UserCrud userCrud = new UserCrud();
-        try{
-            User user1 = userCrud.getUserByName(user.getUserName());
-            if(user.getPassword().equals(user1.getPassword())){
-
-                return new UserDto(user1);
-            }
-            return null;
-        }
-        catch (Exception e){
-            return null;
-        }
-
-    }
-
 //    @POST
-//    @Path("/test")
+//    @Path("/log")
 //    @Consumes(MediaType.APPLICATION_JSON)
 //    @Produces(MediaType.APPLICATION_JSON)
-//    public User test(){
+//    public UserDto login(User user){
 //        UserCrud userCrud = new UserCrud();
 //        try{
 //            User user1 = userCrud.getUserByName(user.getUserName());
 //            if(user.getPassword().equals(user1.getPassword())){
-//                return user1;
+//
+//                return new UserDto(user1);
 //            }
 //            return null;
 //        }
@@ -90,6 +71,7 @@ public class UserResources {
 //        }
 //
 //    }
+
 
 
 }
