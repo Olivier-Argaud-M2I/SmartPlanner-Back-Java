@@ -6,6 +6,7 @@ import fr.m2i.smartplanner.dtos.UserDto;
 import fr.m2i.smartplanner.models.JwtResponse;
 import fr.m2i.smartplanner.models.User;
 import fr.m2i.smartplanner.services.JwtService;
+import fr.m2i.smartplanner.utils.Encrypt;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -30,9 +31,8 @@ public class JwtResources {
         UserCrud userCrud = new UserCrud();
         try{
             User user1 = userCrud.getUserByName(user.getUserName());
-            if(user.getPassword().equals(user1.getPassword())){
+            if(Encrypt.encryptPassword(user.getPassword()).equals(user1.getPassword())){
 
-//                return new UserDto(user1);
                 return jwtService.createJwtToken(user1);
             }
             return null;
@@ -40,6 +40,17 @@ public class JwtResources {
         catch (Exception e){
             return null;
         }
+
+    }
+
+    @POST
+    @Path("/changePwd")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void changePwd(User user){
+        UserCrud userCrud = new UserCrud();
+        user.setPassword(Encrypt.encryptPassword(user.getPassword()));
+        userCrud.saveUser(user);
 
     }
 

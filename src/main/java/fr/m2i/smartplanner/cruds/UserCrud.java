@@ -2,6 +2,7 @@ package fr.m2i.smartplanner.cruds;
 
 
 import fr.m2i.smartplanner.models.User;
+import fr.m2i.smartplanner.utils.Encrypt;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,29 +18,17 @@ public class UserCrud {
         this.factory = Persistence.createEntityManagerFactory("smartplanner");
     }
 
+
+
     public List<User> getUsers(){
         EntityManager em = factory.createEntityManager();
         List<User> users = em.createNamedQuery("selectAllUser").getResultList();
         em.close();
 
-
-//        users.forEach(user -> {
-//            user.getCollaborators().forEach(collaborator -> {
-//                collaborator.getCollab().getUserName();
-//
-//            });
-//        });
-
-//        users.forEach(user -> {
-//            user.getCollaborators().forEach(collaborator -> {
-//                collaborator.getCalendarPrivileges();
-//
-//            });
-//        });
-
-
         return users;
     }
+
+
 
     public User getUserById(Integer id){
         EntityManager em = factory.createEntityManager();
@@ -47,6 +36,8 @@ public class UserCrud {
         em.close();
         return user;
     }
+
+
 
     public User getUserByName(String username){
         User user = null;
@@ -75,6 +66,8 @@ public class UserCrud {
         return user;
     }
 
+
+
     public User saveUser(User user){
         EntityManager em = factory.createEntityManager();
 
@@ -84,8 +77,11 @@ public class UserCrud {
             if(user.getId()!=null){
                 user = em.merge(user);
             }
+            else{
+                user.setPassword(Encrypt.encryptPassword(user.getPassword()));
+            }
             em.persist(user);
-//            addContact(user,em);
+
             valid = true;
         }
         finally {
@@ -102,16 +98,8 @@ public class UserCrud {
         return user;
     }
 
-//    private void addContact(User user,EntityManager em){
-//        for (User contact:user.getCollaborators()) {
-//            if(contact.getCollaborators().stream().anyMatch(collabo->collabo.getId().equals(user.getId()))){
-//                return;
-//            }
-//            contact.getCollaborators().add(user);
-//            em.persist(contact);
-//        }
-//
-//    }
+
+
 
     public void deleteUser(User user){
         EntityManager em = factory.createEntityManager();
@@ -131,6 +119,8 @@ public class UserCrud {
         }
         em.close();
     }
+
+
 
     public void deleteUserById(Integer id){
         EntityManager em = factory.createEntityManager();
