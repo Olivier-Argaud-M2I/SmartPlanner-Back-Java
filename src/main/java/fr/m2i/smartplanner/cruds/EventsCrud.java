@@ -143,21 +143,39 @@ public class EventsCrud {
         EntityManager em = factory.createEntityManager();
         DateManipulation dm = new DateManipulation();
         ArrayList<Long> timeRange = dm.getDayRange(timestamp);
-        List<Events> events = em.createNamedQuery("selectAllEventsByDayAndUserId")
+        List<Events> events = em.createNamedQuery("selectAllEventsByRangeAndUserId")
                 .setParameter("timestamp1",timeRange.get(0)).setParameter("timestamp2",timeRange.get(1))
                 .setParameter("idUser",id).getResultList();
         em.close();
         return events;
     }
 
-    public List<Events> getEventsByMonthAndUserId(Long timestamp1, Integer id){
+    public List<Events> getEventsByMonthAndUserId(Long timestamp, Integer id) throws ParseException {
+
         EntityManager em = factory.createEntityManager();
 
         DateManipulation dm = new DateManipulation();
 
-        ArrayList<Long> timeRange = dm.getMonthRange(timestamp1);
+        ArrayList<Long> timeRange = dm.getMonthRange(timestamp);
 
-        List<Events> events = em.createNamedQuery("selectAllEventsByDayAndUserId")
+        List<Events> events = em.createNamedQuery("selectAllEventsByRangeAndUserId")
+                .setParameter("timestamp1",timeRange.get(0)).setParameter("timestamp2",timeRange.get(1))
+                .setParameter("idUser",id)
+                .getResultList();
+        em.close();
+
+        return events;
+    }
+
+    public List<Events> getEventsByWeekAndUserId(Long timestamp, Integer id) throws ParseException {
+
+        EntityManager em = factory.createEntityManager();
+
+        DateManipulation dm = new DateManipulation();
+
+        ArrayList<Long> timeRange = dm.getMonthRange(timestamp);
+
+        List<Events> events = em.createNamedQuery("selectAllEventsByRangeAndUserId")
                 .setParameter("timestamp1",timeRange.get(0)).setParameter("timestamp2",timeRange.get(1))
                 .setParameter("idUser",id)
                 .getResultList();

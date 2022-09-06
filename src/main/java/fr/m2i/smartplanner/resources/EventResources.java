@@ -79,6 +79,13 @@ public class EventResources {
         EventsCrud eventsCrud = new EventsCrud();
         return eventsCrud.getEventsByDayAndUserId(timestamp,id);
     }
+    @GET
+    @Path("/allByMonthAndUserId/{id}/{timestamp}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Events> getEventsByMonthAndUserId(@PathParam("timestamp")Long timestamp,@PathParam("id")Integer id) throws ParseException {
+        EventsCrud eventsCrud = new EventsCrud();
+        return eventsCrud.getEventsByMonthAndUserId(timestamp,id);
+    }
 
    /** @GET
     @Path("/allSecond")
