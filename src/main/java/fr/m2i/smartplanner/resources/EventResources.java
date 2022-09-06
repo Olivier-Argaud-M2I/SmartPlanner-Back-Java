@@ -79,6 +79,15 @@ public class EventResources {
         EventsCrud eventsCrud = new EventsCrud();
         return eventsCrud.getEventsByDayAndUserId(timestamp,id);
     }
+
+    @GET
+    @Path("/allByWeekAndUserId/{id}/{timestamp}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Events> getEventsByWeekAndUserId(@PathParam("timestamp")Long timestamp,@PathParam("id")Integer id) throws ParseException {
+        EventsCrud eventsCrud = new EventsCrud();
+        return eventsCrud.getEventsByWeekAndUserId(timestamp,id);
+    }
+
     @GET
     @Path("/allByMonthAndUserId/{id}/{timestamp}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -86,17 +95,5 @@ public class EventResources {
         EventsCrud eventsCrud = new EventsCrud();
         return eventsCrud.getEventsByMonthAndUserId(timestamp,id);
     }
-
-   /** @GET
-    @Path("/allSecond")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Events> getEventsByDayAndUserId() throws ParseException {
-
-        EventsCrud eventsCrud = new EventsCrud();
-        DateManipulation test = new DateManipulation();
-        List<Long> timeRange = test.getDayRange(1662385500L);
-        return eventsCrud.getEventsByDayAndUserId(1632385500L,1);
-    }*/
-
 
 }
