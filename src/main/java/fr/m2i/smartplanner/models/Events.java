@@ -5,11 +5,14 @@ import javax.persistence.*;
 @Entity
 @Table(name="events")
 @NamedQueries({
-        @NamedQuery(name="selectAllEvents", query="SELECT event FROM Events event ORDER BY dateDebutTimestamp"),
-        @NamedQuery(name="selectEventsByUser", query="SELECT event FROM Events event WHERE userId = :idUser ORDER BY dateDebutTimestamp"),
-        @NamedQuery(name="findEventById", query="SELECT event FROM Events event WHERE id=:id")
+        @NamedQuery(name="selectAllEvents", query="SELECT event FROM Events event ORDER BY date_debut_timestamp DESC"),
+        @NamedQuery(name="selectEventsByUser", query="SELECT event FROM Events event WHERE user_id = :idUser ORDER BY date_debut_timestamp DESC"),
+        @NamedQuery(name="findEventById", query="SELECT event FROM Events event WHERE id=:id ORDER BY date_debut_timestamp DESC"),
+        @NamedQuery(name="selectAllEventsByUserId", query="SELECT event FROM Events event WHERE user_id=:idUser ORDER BY date_debut_timestamp"),
+        @NamedQuery(name="selectAllEventsByDay", query="SELECT event FROM Events event WHERE date_debut_timestamp BETWEEN :timestamp1 AND :timestamp2 ORDER BY date_debut_timestamp DESC"),
+        @NamedQuery(name="selectAllEventsByDayAndUserId", query="SELECT event FROM Events event WHERE user_id=:idUser AND date_debut_timestamp BETWEEN :timestamp1 AND :timestamp2 ORDER BY date_debut_timestamp DESC")
 })
-public class Events{
+public class Events {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +22,11 @@ public class Events{
     @Column(name="description")
     private String description;
     @Column(name="user_id")
-    private Integer userId;
+    private Integer user_id;
     @Column(name="date_debut_timestamp")
-    private Long dateDebutTimestamp;
+    private Long date_debut_timestamp;
     @Column(name="date_fin_timestamp")
-    private Long dateFinTimestamp;
+    private Long date_fin_timestamp;
 
     public Integer getId() {
         return id;
@@ -49,39 +52,39 @@ public class Events{
         this.description = description;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
-    public Long getDateDebutTimestamp() {
-        return dateDebutTimestamp;
+    public Long getDate_debut_timestamp() {
+        return date_debut_timestamp;
     }
 
-    public void setDateDebutTimestamp(Long dateDebutTimestamp) {
-        this.dateDebutTimestamp = dateDebutTimestamp;
+    public void setDate_debut_timestamp(Long date_debut_timestamp) {
+        this.date_debut_timestamp = date_debut_timestamp;
     }
 
-    public Long getDateFinTimestamp() {
-        return dateFinTimestamp;
+    public Long getDate_fin_timestamp() {
+        return date_fin_timestamp;
     }
 
-    public void setDateFinTimestamp(Long dateFinTimestamp) {
-        this.dateFinTimestamp = dateFinTimestamp;
+    public void setDate_fin_timestamp(Long date_fin_timestamp) {
+        this.date_fin_timestamp = date_fin_timestamp;
     }
 
     public Events(){}
 
-    public Events(Integer id, String name, String description,Integer userId,Long dateDebutTimestamp,Long dateFinTimestamp){
+    public Events(Integer id, String name, String description, Integer userId, Long dateDebutTimestamp, Long dateFinTimestamp){
         this.id=id;
         this.name=name;
         this.description=description;
-        this.userId=userId;
-        this.dateDebutTimestamp=dateDebutTimestamp;
-        this.dateFinTimestamp=dateFinTimestamp;
+        this.user_id=userId;
+        this.date_debut_timestamp=dateDebutTimestamp;
+        this.date_fin_timestamp=dateFinTimestamp;
     }
 
 }

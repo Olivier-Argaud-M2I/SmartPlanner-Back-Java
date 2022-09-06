@@ -2,12 +2,12 @@ package fr.m2i.smartplanner.resources;
 
 
 import fr.m2i.smartplanner.cruds.EventsCrud;
-import fr.m2i.smartplanner.cruds.PrivilegeCrud;
 import fr.m2i.smartplanner.models.Events;
-import fr.m2i.smartplanner.models.Privilege;
+import fr.m2i.smartplanner.utils.DateManipulation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.text.ParseException;
 import java.util.List;
 
 @Path("/events")
@@ -21,8 +21,6 @@ public class EventResources {
         EventsCrud eventsCrud = new EventsCrud();
         return eventsCrud.getEventById(id);
     }
-
-
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
@@ -33,12 +31,21 @@ public class EventResources {
 
 
     @POST
-    @Path("/save")
+    @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Events saveEvent(Events events){
+    public Events createEvent(Events events){
         EventsCrud eventsCrud = new EventsCrud();
-        return eventsCrud.saveEvent(events);
+        return eventsCrud.createEvent(events);
+    }
+
+    @POST
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Events updateEvent(Events events){
+        EventsCrud eventsCrud = new EventsCrud();
+        return eventsCrud.updateEvent(events);
     }
 
 
@@ -48,5 +55,41 @@ public class EventResources {
         EventsCrud eventsCrud = new EventsCrud();
         eventsCrud.deleteEventById(id);
     }
+
+    @GET
+    @Path("/allByUserId/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Events> getEventsByUserId(@PathParam("userId")Integer idUser){
+        EventsCrud eventsCrud = new EventsCrud();
+        return eventsCrud.getEventsByUserId(idUser);
+    }
+
+    @GET
+    @Path("/allByDay/{timestamp}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Events> getEventsByDay(@PathParam("timestamp")Long timestamp) throws ParseException {
+        EventsCrud eventsCrud = new EventsCrud();
+        return eventsCrud.getEventsByDay(timestamp);
+    }
+
+    @GET
+    @Path("/allByDayAndUserId/{id}/{timestamp}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Events> getEventsByDayAndUserId(@PathParam("timestamp")Long timestamp,@PathParam("id")Integer id) throws ParseException {
+        EventsCrud eventsCrud = new EventsCrud();
+        return eventsCrud.getEventsByDayAndUserId(timestamp,id);
+    }
+
+   /** @GET
+    @Path("/allSecond")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Events> getEventsByDayAndUserId() throws ParseException {
+
+        EventsCrud eventsCrud = new EventsCrud();
+        DateManipulation test = new DateManipulation();
+        List<Long> timeRange = test.getDayRange(1662385500L);
+        return eventsCrud.getEventsByDayAndUserId(1632385500L,1);
+    }*/
+
 
 }
