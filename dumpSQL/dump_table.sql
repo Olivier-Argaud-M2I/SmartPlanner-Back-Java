@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS events ;
 CREATE TABLE events(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL ,
-    description TEXT NOT NULL ,
+    description TEXT ,
     user_id INTEGER NOT NULL ,
     date_debut_timestamp LONG NOT NULL,
     date_fin_timestamp LONG NOT NULL

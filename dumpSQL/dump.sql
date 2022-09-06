@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS events ;
 CREATE TABLE events(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL ,
-    description TEXT NOT NULL ,
+    description TEXT ,
     user_id INTEGER NOT NULL ,
     date_debut_timestamp LONG NOT NULL,
     date_fin_timestamp LONG NOT NULL
@@ -126,10 +126,10 @@ INSERT INTO role(name) VALUES ('Admin');
 INSERT INTO role(name) VALUES ('User');
 INSERT INTO role(name) VALUES ('Visitor');
 
-INSERT INTO calendar_privilege(name,status) VALUES ('lecture',false);
-INSERT INTO calendar_privilege(name,status) VALUES ('modify event',false);
-INSERT INTO calendar_privilege(name,status) VALUES ('ajout event',false);
-INSERT INTO calendar_privilege(name,status) VALUES ('delete event',false);
+INSERT INTO calendar_privilege(name) VALUES ('lecture');
+INSERT INTO calendar_privilege(name) VALUES ('modify event');
+INSERT INTO calendar_privilege(name) VALUES ('ajout event');
+INSERT INTO calendar_privilege(name) VALUES ('delete event');
 
 
 
