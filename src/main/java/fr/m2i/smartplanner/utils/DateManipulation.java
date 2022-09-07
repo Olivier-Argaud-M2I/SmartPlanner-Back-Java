@@ -20,17 +20,26 @@ public class DateManipulation {
     public ArrayList<Long> getDayRange(Long timestamp) throws ParseException {
 
         ArrayList<Long> rangeDaily = new ArrayList<>();
+
         // Ici datetime complet.
         Long secondsToMillis = timestamp*1000L;
         Date fullAskedDate = new Date(secondsToMillis);
+
         // Ici on instancie un format de date plus simple vide
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
         // Ici on met la date demandée et on l'obtient au format string demandé
         String simpleDateString= formatter.format(fullAskedDate);
         Date simpleDate = formatter.parse(simpleDateString);
+
+        // On utilise un LocalDate pour ajouter 1 journée
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        LocalDate dayAfterLD = LocalDate.parse(simpleDateString).plusDays(1);
+        Date dayAfter = Date.from(dayAfterLD.atStartOfDay(defaultZoneId).toInstant());
+
         // On peut maintenant reconstruire proprement la date
         Long tms1 = simpleDate.getTime()/1000L;
-        Long tms2 = tms1+86399; // Nombre de secondes dans une journée -1
+        Long tms2 = (dayAfter.getTime()/1000)-1; // Nombre de secondes dans une journée -1
         rangeDaily.add(tms1);rangeDaily.add(tms2);
         // On renvoit le range sous forme d'un tableau à deux entrées
         return rangeDaily;
