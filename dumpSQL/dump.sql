@@ -111,7 +111,7 @@ ALTER TABLE events ADD CONSTRAINT FK_events_user FOREIGN KEY (user_id) REFERENCE
 
 
 
-
+# Insertion des données
 INSERT INTO user(user_name,password,first_name,last_name,email,telephone) VALUES
     ('admin','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','admin','ADMIN','admin@smartplanner.com','01 23 45 67 89'),
     ('olivier','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','olivier','ARGAUD','o.argaud@smartplanner.com','01 23 45 67 88'),
@@ -139,21 +139,35 @@ INSERT INTO user(user_name,password,first_name,last_name,email,telephone) VALUES
     ('norton','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','Connor','Huber','scelerisque.lorem@yahoo.ca','08 98 72 48 67');
 
 
-
+# Permission Utilisateur
+INSERT INTO privilege(name) VALUES ('userRead');
+INSERT INTO privilege(name) VALUES ('userCreate');
+INSERT INTO privilege(name) VALUES ('userDelete');
+# Permission Role
+INSERT INTO privilege(name) VALUES ('roleRead');
+INSERT INTO privilege(name) VALUES ('roleCreate');
+INSERT INTO privilege(name) VALUES ('roleDelete');
+# Permission Privilege
+INSERT INTO privilege(name) VALUES ('privilegeRead');
+INSERT INTO privilege(name) VALUES ('privilegeCreate');
+INSERT INTO privilege(name) VALUES ('privilegeDelete');
+# Permission Contact
+INSERT INTO privilege(name) VALUES ('contactAdd');
+INSERT INTO privilege(name) VALUES ('contactRead');
+INSERT INTO privilege(name) VALUES ('contactUpdate');
+INSERT INTO privilege(name) VALUES ('contactDelete');
+# Permission OLD
 INSERT INTO privilege(name) VALUES ('crudrole');
 INSERT INTO privilege(name) VALUES ('crudprivilege');
 INSERT INTO privilege(name) VALUES ('cruduser');
-INSERT INTO privilege(name) VALUES ('read user');
-INSERT INTO privilege(name) VALUES ('create user');
-INSERT INTO privilege(name) VALUES ('delete user');
-INSERT INTO privilege(name) VALUES ('read role');
-INSERT INTO privilege(name) VALUES ('create role');
-INSERT INTO privilege(name) VALUES ('delete role');
-INSERT INTO privilege(name) VALUES ('read privilege');
-INSERT INTO privilege(name) VALUES ('create privilege');
-INSERT INTO privilege(name) VALUES ('delete privilege');
 
+# Permission Calendrier
+INSERT INTO calendar_privilege(name) VALUES ('readEvent');
+INSERT INTO calendar_privilege(name) VALUES ('modifyEvent');
+INSERT INTO calendar_privilege(name) VALUES ('addEvent');
+INSERT INTO calendar_privilege(name) VALUES ('deleteEvent');
 
+# Role Utilisateur
 INSERT INTO role(name) VALUES ('Admin');
 INSERT INTO role(name) VALUES ('Ressources Humaines');
 INSERT INTO role(name) VALUES ('Responsable de projet');
@@ -163,43 +177,50 @@ INSERT INTO role(name) VALUES ('Ingénieur Logiciel');
 INSERT INTO role(name) VALUES ('Collaborateur');
 
 
-INSERT INTO calendar_privilege(name) VALUES ('lecture');
-INSERT INTO calendar_privilege(name) VALUES ('modify event');
-INSERT INTO calendar_privilege(name) VALUES ('ajout event');
-INSERT INTO calendar_privilege(name) VALUES ('delete event');
-
-
-
+# Privilege Utilisateur ADMIN
 INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,1);
 INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,2);
 INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,3);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,4);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,5);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,6);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,7);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,8);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,9);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,10);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,11);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,12);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,13);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,14);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,15);
+INSERT INTO role_privilege(role_id, privilege_id) VALUES (1,16);
 
-
+# Role Utilisateurs Admin, Olivier, Enzo, Melvin
 INSERT INTO user_role(user_id, role_id) VALUES (1,1);
 INSERT INTO user_role(user_id, role_id) VALUES (2,1);
 INSERT INTO user_role(user_id, role_id) VALUES (3,1);
 INSERT INTO user_role(user_id, role_id) VALUES (4,1);
 
-
-INSERT INTO user_role(user_id, role_id) VALUES (5,3);
+# Roles Utilisateurs générés
+INSERT INTO user_role(user_id, role_id) VALUES (5,2);
 INSERT INTO user_role(user_id, role_id) VALUES (6,3);
 INSERT INTO user_role(user_id, role_id) VALUES (7,3);
-INSERT INTO user_role(user_id, role_id) VALUES (8,3);
-INSERT INTO user_role(user_id, role_id) VALUES (9,3);
-INSERT INTO user_role(user_id, role_id) VALUES (10,3);
-INSERT INTO user_role(user_id, role_id) VALUES (11,3);
-INSERT INTO user_role(user_id, role_id) VALUES (12,3);
-INSERT INTO user_role(user_id, role_id) VALUES (13,3);
-INSERT INTO user_role(user_id, role_id) VALUES (14,3);
-INSERT INTO user_role(user_id, role_id) VALUES (15,3);
-INSERT INTO user_role(user_id, role_id) VALUES (16,3);
-INSERT INTO user_role(user_id, role_id) VALUES (17,3);
-INSERT INTO user_role(user_id, role_id) VALUES (18,3);
-INSERT INTO user_role(user_id, role_id) VALUES (19,3);
-INSERT INTO user_role(user_id, role_id) VALUES (20,3);
-INSERT INTO user_role(user_id, role_id) VALUES (21,3);
-INSERT INTO user_role(user_id, role_id) VALUES (22,3);
-INSERT INTO user_role(user_id, role_id) VALUES (23,3);
+INSERT INTO user_role(user_id, role_id) VALUES (8,4);
+INSERT INTO user_role(user_id, role_id) VALUES (9,4);
+INSERT INTO user_role(user_id, role_id) VALUES (10,5);
+INSERT INTO user_role(user_id, role_id) VALUES (11,5);
+INSERT INTO user_role(user_id, role_id) VALUES (12,6);
+INSERT INTO user_role(user_id, role_id) VALUES (13,6);
+INSERT INTO user_role(user_id, role_id) VALUES (14,6);
+INSERT INTO user_role(user_id, role_id) VALUES (15,6);
+INSERT INTO user_role(user_id, role_id) VALUES (16,6);
+INSERT INTO user_role(user_id, role_id) VALUES (17,7);
+INSERT INTO user_role(user_id, role_id) VALUES (18,7);
+INSERT INTO user_role(user_id, role_id) VALUES (19,7);
+INSERT INTO user_role(user_id, role_id) VALUES (20,7);
+INSERT INTO user_role(user_id, role_id) VALUES (21,7);
+INSERT INTO user_role(user_id, role_id) VALUES (22,7);
+INSERT INTO user_role(user_id, role_id) VALUES (23,7);
 
 
 

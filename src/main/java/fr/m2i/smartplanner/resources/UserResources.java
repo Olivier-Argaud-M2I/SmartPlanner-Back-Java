@@ -21,7 +21,7 @@ public class UserResources {
     @Produces(MediaType.APPLICATION_JSON)
     public UserDto getUserById(@PathParam("id")int id,@Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("read user")){
             UserCrud userCrud = new UserCrud();
             return new UserDto(userCrud.getUserById(id));
         }
@@ -34,7 +34,7 @@ public class UserResources {
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserDto> getUsers(@Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("read user")){
             UserCrud userCrud = new UserCrud();
             List<UserDto> userDtos = userCrud.getUsers().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
             return userDtos;
@@ -49,7 +49,7 @@ public class UserResources {
     @Produces(MediaType.APPLICATION_JSON)
     public User saveUser(User user,@Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("create user")){
             UserCrud userCrud = new UserCrud();
             return userCrud.saveUser(user);
         }
@@ -62,7 +62,7 @@ public class UserResources {
     @Path("/delete/{id}")
     public void deleteUser(@PathParam("id")int id,@Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("delete user")){
             UserCrud userCrud = new UserCrud();
             userCrud.deleteUserById(id);
         }
