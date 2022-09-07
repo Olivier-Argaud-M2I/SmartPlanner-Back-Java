@@ -3,10 +3,15 @@ package fr.m2i.smartplanner.resources;
 
 import fr.m2i.smartplanner.cruds.CalendarPrivilegeCrud;
 import fr.m2i.smartplanner.cruds.PrivilegeCrud;
+import fr.m2i.smartplanner.cruds.RoleCrud;
 import fr.m2i.smartplanner.models.CalendarPrivilege;
 import fr.m2i.smartplanner.models.Privilege;
+import fr.m2i.smartplanner.models.Role;
+import fr.m2i.smartplanner.models.User;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -17,18 +22,26 @@ public class CalendarPrivilegeResources {
     @GET
     @Path("/privilege/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public CalendarPrivilege getCalendarPrivilegeById(@PathParam("id")int id){
-        CalendarPrivilegeCrud calendarPrivilegeCrud = new CalendarPrivilegeCrud();
-        return calendarPrivilegeCrud.getCalendarPrivilegeById(id);
+    public CalendarPrivilege getCalendarPrivilegeById(@PathParam("id")int id, @Context HttpServletRequest request){
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            CalendarPrivilegeCrud calendarPrivilegeCrud = new CalendarPrivilegeCrud();
+            return calendarPrivilegeCrud.getCalendarPrivilegeById(id);
+        }
+        return null;
     }
 
 
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CalendarPrivilege> getCalendarPrivileges(){
-        CalendarPrivilegeCrud calendarPrivilegeCrud = new CalendarPrivilegeCrud();
-        return calendarPrivilegeCrud.getCalendarPrivileges();
+    public List<CalendarPrivilege> getCalendarPrivileges(@Context HttpServletRequest request){
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            CalendarPrivilegeCrud calendarPrivilegeCrud = new CalendarPrivilegeCrud();
+            return calendarPrivilegeCrud.getCalendarPrivileges();
+        }
+        return null;
     }
 
 

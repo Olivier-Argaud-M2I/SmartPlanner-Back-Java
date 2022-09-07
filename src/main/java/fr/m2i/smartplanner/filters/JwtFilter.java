@@ -51,6 +51,8 @@ public class JwtFilter implements Filter {
 
             User user = userCrud.getUserByName(username);
 
+            request.setAttribute("user",user);
+
         }
         catch(Exception e){
             return;

@@ -31,6 +31,15 @@ INSERT INTO user(user_name,password,first_name,last_name,email,telephone) VALUES
 INSERT INTO privilege(name) VALUES ('crudrole');
 INSERT INTO privilege(name) VALUES ('crudprivilege');
 INSERT INTO privilege(name) VALUES ('cruduser');
+INSERT INTO privilege(name) VALUES ('read user');
+INSERT INTO privilege(name) VALUES ('create user');
+INSERT INTO privilege(name) VALUES ('delete user');
+INSERT INTO privilege(name) VALUES ('read role');
+INSERT INTO privilege(name) VALUES ('create role');
+INSERT INTO privilege(name) VALUES ('delete role');
+INSERT INTO privilege(name) VALUES ('read privilege');
+INSERT INTO privilege(name) VALUES ('create privilege');
+INSERT INTO privilege(name) VALUES ('delete privilege');
 
 
 INSERT INTO role(name) VALUES ('Admin');
@@ -38,9 +47,9 @@ INSERT INTO role(name) VALUES ('User');
 INSERT INTO role(name) VALUES ('Visitor');
 
 
-INSERT INTO calendar_privilege(name) VALUES ('lecture');
+INSERT INTO calendar_privilege(name) VALUES ('read event');
 INSERT INTO calendar_privilege(name) VALUES ('modify event');
-INSERT INTO calendar_privilege(name) VALUES ('ajout event');
+INSERT INTO calendar_privilege(name) VALUES ('create event');
 INSERT INTO calendar_privilege(name) VALUES ('delete event');
 
 

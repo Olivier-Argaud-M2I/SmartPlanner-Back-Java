@@ -2,9 +2,14 @@ package fr.m2i.smartplanner.resources;
 
 
 import fr.m2i.smartplanner.cruds.ContactCrud;
+import fr.m2i.smartplanner.cruds.RoleCrud;
 import fr.m2i.smartplanner.models.Contact;
+import fr.m2i.smartplanner.models.Role;
+import fr.m2i.smartplanner.models.User;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -14,22 +19,29 @@ public class ContactResources {
     @GET
     @Path("/user/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Contact> getAllContactFromUser(@PathParam("id")int id){
-        ContactCrud contactCrud = new ContactCrud();
-        List<Contact>contacts = contactCrud.getContacts(id);
-
-        return contacts;
+    public List<Contact> getAllContactFromUser(@PathParam("id")int id, @Context HttpServletRequest request){
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            ContactCrud contactCrud = new ContactCrud();
+            List<Contact>contacts = contactCrud.getContacts(id);
+            return contacts;
+        }
+        return null;
     }
 
 
     @GET
     @Path("/contact/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Contact getContactById(@PathParam("id")int id){
-        ContactCrud contactCrud = new ContactCrud();
-        Contact contact = contactCrud.getContactById(id);
+    public Contact getContactById(@PathParam("id")int id, @Context HttpServletRequest request){
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            ContactCrud contactCrud = new ContactCrud();
+            Contact contact = contactCrud.getContactById(id);
 
-        return contact;
+            return contact;
+        }
+        return null;
     }
 
 
@@ -38,11 +50,15 @@ public class ContactResources {
     @GET
     @Path("/contact/{idU}/{idC}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Contact getContactByIds(@PathParam("idU")int idU,@PathParam("idC")int idC){
-        ContactCrud contactCrud = new ContactCrud();
-        Contact contact = contactCrud.getContactByIds(idU,idC);
+    public Contact getContactByIds(@PathParam("idU")int idU,@PathParam("idC")int idC, @Context HttpServletRequest request){
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            ContactCrud contactCrud = new ContactCrud();
+            Contact contact = contactCrud.getContactByIds(idU,idC);
 
-        return contact;
+            return contact;
+        }
+        return null;
     }
 
 
@@ -63,26 +79,37 @@ public class ContactResources {
     @POST
     @Path("/create/{idU}/{idC}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Contact saveContact(@PathParam("idU")int idU,@PathParam("idC")int idC){
-        ContactCrud contactCrud = new ContactCrud();
-        return contactCrud.createContact(idU,idC);
+    public Contact saveContact(@PathParam("idU")int idU,@PathParam("idC")int idC, @Context HttpServletRequest request){
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            ContactCrud contactCrud = new ContactCrud();
+            return contactCrud.createContact(idU,idC);
+        }
+        return null;
     }
 
     @POST
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Contact saveContact(Contact contact){
-        ContactCrud contactCrud = new ContactCrud();
-        return contactCrud.updateContact(contact);
+    public Contact saveContact(Contact contact, @Context HttpServletRequest request){
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            ContactCrud contactCrud = new ContactCrud();
+            return contactCrud.updateContact(contact);
+        }
+        return null;
     }
 
 
     @POST
     @Path("/delete/{idU}/{idC}")
-    public void deleteUser(@PathParam("idU")int idU, @PathParam("idC")int idC){
-        ContactCrud contactCrud = new ContactCrud();
-        contactCrud.deleteContact(idU,idC);
+    public void deleteUser(@PathParam("idU")int idU, @PathParam("idC")int idC, @Context HttpServletRequest request){
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            ContactCrud contactCrud = new ContactCrud();
+            contactCrud.deleteContact(idU,idC);
+        }
     }
 
 //
