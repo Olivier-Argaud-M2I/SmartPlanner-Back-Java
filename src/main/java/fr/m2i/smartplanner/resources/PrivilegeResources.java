@@ -22,7 +22,7 @@ public class PrivilegeResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Privilege getPrivilegeById(@PathParam("id")int id, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("read privilege")){
+        if(user1.hasPrivilege("privilegeRead")){
             PrivilegeCrud privilegeCrud = new PrivilegeCrud();
             return privilegeCrud.getPrivilegeById(id);
         }
@@ -35,7 +35,7 @@ public class PrivilegeResources {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Privilege> getPrivileges(@Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("read privilege")){
+        if(user1.hasPrivilege("privilegeRead")){
             PrivilegeCrud privilegeCrud = new PrivilegeCrud();
             return privilegeCrud.getPrivileges();
         }
@@ -49,7 +49,7 @@ public class PrivilegeResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Privilege savePrivilege(Privilege privilege, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("create privilege")){
+        if(user1.hasPrivilege("privilegeCreate")){
             PrivilegeCrud privilegeCrud = new PrivilegeCrud();
             return privilegeCrud.savePrivilege(new Privilege(privilege.getName()));
         }
@@ -61,7 +61,7 @@ public class PrivilegeResources {
     @Path("/delete/{id}")
     public void deletePrivilege(@PathParam("id")int id, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("delete privilege")){
+        if(user1.hasPrivilege("privilegeDelete")){
             PrivilegeCrud privilegeCrud = new PrivilegeCrud();
             privilegeCrud.deletePrivilegeById(id);
         }

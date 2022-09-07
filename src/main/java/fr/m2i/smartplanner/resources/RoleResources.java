@@ -26,7 +26,7 @@ public class RoleResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Role getRoleById(@PathParam("id")int id, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("read role")){
+        if(user1.hasPrivilege("roleRead")){
             RoleCrud roleCrud = new RoleCrud();
             return roleCrud.getRoleById(id);
         }
@@ -39,7 +39,7 @@ public class RoleResources {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Role> getRoles(@Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("read role")){
+        if(user1.hasPrivilege("roleRead")){
             RoleCrud roleCrud = new RoleCrud();
             return roleCrud.getRoles();
         }
@@ -53,7 +53,7 @@ public class RoleResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Role saveRole(Role role, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("create role")){
+        if(user1.hasPrivilege("roleCreate")){
             RoleCrud roleCrud = new RoleCrud();
             return roleCrud.saveRole(role);
         }
@@ -65,7 +65,7 @@ public class RoleResources {
     @Path("/delete/{id}")
     public void deleteRole(@PathParam("id")int id, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("delete role")){
+        if(user1.hasPrivilege("roleDelete")){
             RoleCrud roleCrud = new RoleCrud();
             roleCrud.deleteRoleById(id);
         }

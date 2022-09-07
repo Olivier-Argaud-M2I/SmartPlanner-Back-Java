@@ -21,7 +21,7 @@ public class ContactResources {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Contact> getAllContactFromUser(@PathParam("id")int id, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("read contact")){
+        if(user1.hasPrivilege("contactRead")){
             ContactCrud contactCrud = new ContactCrud();
             List<Contact>contacts = contactCrud.getContacts(id);
             return contacts;
@@ -35,7 +35,7 @@ public class ContactResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Contact getContactById(@PathParam("id")int id, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("read contact")){
+        if(user1.hasPrivilege("contactRead")){
             ContactCrud contactCrud = new ContactCrud();
             Contact contact = contactCrud.getContactById(id);
 
@@ -52,7 +52,7 @@ public class ContactResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Contact getContactByIds(@PathParam("idU")int idU,@PathParam("idC")int idC, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("read contact")){
+        if(user1.hasPrivilege("contactRead")){
             ContactCrud contactCrud = new ContactCrud();
             Contact contact = contactCrud.getContactByIds(idU,idC);
 
