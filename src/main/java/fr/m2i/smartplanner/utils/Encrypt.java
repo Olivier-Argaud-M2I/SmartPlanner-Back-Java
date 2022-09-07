@@ -9,13 +9,13 @@ public class Encrypt {
 
     public static String encryptPassword(String password)
     {
-        String sha1 = "";
+        String sha256 = "";
         try
         {
-            MessageDigest crypt = MessageDigest.getInstance("SHA-1");
+            MessageDigest crypt = MessageDigest.getInstance("SHA-256");
             crypt.reset();
             crypt.update(password.getBytes("UTF-8"));
-            sha1 = byteToHex(crypt.digest());
+            sha256 = byteToHex(crypt.digest());
         }
         catch(NoSuchAlgorithmException e)
         {
@@ -25,7 +25,7 @@ public class Encrypt {
         {
             e.printStackTrace();
         }
-        return sha1;
+        return sha256;
     }
 
 
