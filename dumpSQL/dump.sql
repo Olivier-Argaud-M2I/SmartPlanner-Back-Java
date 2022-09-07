@@ -48,8 +48,8 @@ CREATE TABLE `calendar_privilege`(
 
 DROP TABLE IF EXISTS `role` ;
 CREATE TABLE `role`(
-    `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(20) NOT NULL
+   `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+   `name` VARCHAR(20) NOT NULL
 );
 
 
@@ -64,24 +64,24 @@ CREATE TABLE `privilege`(
 
 DROP TABLE IF EXISTS events ;
 CREATE TABLE events(
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(20) NOT NULL ,
-    description TEXT ,
-    user_id INTEGER NOT NULL ,
-    date_debut_timestamp LONG NOT NULL,
-    date_fin_timestamp LONG NOT NULL
+   id INTEGER PRIMARY KEY AUTO_INCREMENT,
+   name VARCHAR(20) NOT NULL ,
+   description TEXT ,
+   user_id INTEGER NOT NULL ,
+   date_debut_timestamp LONG NOT NULL,
+   date_fin_timestamp LONG NOT NULL
 );
 
 
 DROP TABLE IF EXISTS `user` ;
 CREATE TABLE `user`(
-    `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `user_name` VARCHAR(20) NOT NULL ,
-    `password` TEXT NOT NULL ,
-    `first_name` VARCHAR(20) NOT NULL ,
-    `last_name` VARCHAR(20) NOT NULL,
-    `email` VARCHAR(50) NOT NULL ,
-    `telephone` VARCHAR(20) NOT NULL
+   `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
+   `user_name` VARCHAR(20) NOT NULL ,
+   `password` TEXT NOT NULL ,
+   `first_name` VARCHAR(20) NOT NULL ,
+   `last_name` VARCHAR(20) NOT NULL,
+   `email` VARCHAR(50) NOT NULL ,
+   `telephone` VARCHAR(20) NOT NULL
 
 );
 
@@ -146,8 +146,12 @@ INSERT INTO privilege(name) VALUES ('cruduser');
 
 
 INSERT INTO role(name) VALUES ('Admin');
-INSERT INTO role(name) VALUES ('User');
-INSERT INTO role(name) VALUES ('Visitor');
+INSERT INTO role(name) VALUES ('Ressources Humaines');
+INSERT INTO role(name) VALUES ('Responsable de projet');
+INSERT INTO role(name) VALUES ('Scrum Master');
+INSERT INTO role(name) VALUES ('Tech Lead');
+INSERT INTO role(name) VALUES ('Ingénieur Logiciel');
+INSERT INTO role(name) VALUES ('Collaborateur');
 
 
 INSERT INTO calendar_privilege(name) VALUES ('lecture');
