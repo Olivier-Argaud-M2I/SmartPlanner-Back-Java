@@ -83,7 +83,7 @@ public class ContactResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Contact saveContact(@PathParam("idU")int idU,@PathParam("idC")int idC, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("add contact")){
+        if(user1.hasPrivilege("contactAdd")){
             ContactCrud contactCrud = new ContactCrud();
             return contactCrud.createContact(idU,idC);
         }
@@ -96,7 +96,7 @@ public class ContactResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Contact saveContact(Contact contact, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("update contact")){
+        if(user1.hasPrivilege("contactUpdate")&& user1.getId().equals(contact.getUser().getId())){
             ContactCrud contactCrud = new ContactCrud();
             return contactCrud.updateContact(contact);
         }
@@ -108,7 +108,7 @@ public class ContactResources {
     @Path("/delete/{idU}/{idC}")
     public void deleteContact(@PathParam("idU")int idU, @PathParam("idC")int idC, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("delete contact")){
+        if(user1.hasPrivilege("contactDelete")){
             ContactCrud contactCrud = new ContactCrud();
             contactCrud.deleteContact(idU,idC);
         }

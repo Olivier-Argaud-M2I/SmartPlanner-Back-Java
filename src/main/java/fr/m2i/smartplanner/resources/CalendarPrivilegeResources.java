@@ -22,26 +22,20 @@ public class CalendarPrivilegeResources {
     @GET
     @Path("/privilege/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public CalendarPrivilege getCalendarPrivilegeById(@PathParam("id")int id, @Context HttpServletRequest request){
-        User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
-            CalendarPrivilegeCrud calendarPrivilegeCrud = new CalendarPrivilegeCrud();
-            return calendarPrivilegeCrud.getCalendarPrivilegeById(id);
-        }
-        return null;
+    public CalendarPrivilege getCalendarPrivilegeById(@PathParam("id")int id){
+
+        CalendarPrivilegeCrud calendarPrivilegeCrud = new CalendarPrivilegeCrud();
+        return calendarPrivilegeCrud.getCalendarPrivilegeById(id);
     }
 
 
     @GET
     @Path("/all")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CalendarPrivilege> getCalendarPrivileges(@Context HttpServletRequest request){
-        User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
-            CalendarPrivilegeCrud calendarPrivilegeCrud = new CalendarPrivilegeCrud();
-            return calendarPrivilegeCrud.getCalendarPrivileges();
-        }
-        return null;
+    public List<CalendarPrivilege> getCalendarPrivileges(){
+
+        CalendarPrivilegeCrud calendarPrivilegeCrud = new CalendarPrivilegeCrud();
+        return calendarPrivilegeCrud.getCalendarPrivileges();
     }
 
 
