@@ -49,7 +49,7 @@ CREATE TABLE `calendar_privilege`(
 DROP TABLE IF EXISTS `role` ;
 CREATE TABLE `role`(
    `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-   `name` VARCHAR(20) NOT NULL
+   `name` VARCHAR(40) NOT NULL
 );
 
 
@@ -57,7 +57,7 @@ CREATE TABLE `role`(
 DROP TABLE IF EXISTS `privilege` ;
 CREATE TABLE `privilege`(
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(20) NOT NULL
+    `name` VARCHAR(40) NOT NULL
 );
 
 
@@ -143,6 +143,15 @@ INSERT INTO user(user_name,password,first_name,last_name,email,telephone) VALUES
 INSERT INTO privilege(name) VALUES ('crudrole');
 INSERT INTO privilege(name) VALUES ('crudprivilege');
 INSERT INTO privilege(name) VALUES ('cruduser');
+INSERT INTO privilege(name) VALUES ('read user');
+INSERT INTO privilege(name) VALUES ('create user');
+INSERT INTO privilege(name) VALUES ('delete user');
+INSERT INTO privilege(name) VALUES ('read role');
+INSERT INTO privilege(name) VALUES ('create role');
+INSERT INTO privilege(name) VALUES ('delete role');
+INSERT INTO privilege(name) VALUES ('read privilege');
+INSERT INTO privilege(name) VALUES ('create privilege');
+INSERT INTO privilege(name) VALUES ('delete privilege');
 
 
 INSERT INTO role(name) VALUES ('Admin');

@@ -49,7 +49,7 @@ CREATE TABLE `calendar_privilege`(
 DROP TABLE IF EXISTS `role` ;
 CREATE TABLE `role`(
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(20) NOT NULL
+    `name` VARCHAR(40) NOT NULL
 );
 
 
@@ -57,8 +57,9 @@ CREATE TABLE `role`(
 DROP TABLE IF EXISTS `privilege` ;
 CREATE TABLE `privilege`(
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(20) NOT NULL
+    `name` VARCHAR(40) NOT NULL
 );
+
 
 
 
