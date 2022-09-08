@@ -2,11 +2,14 @@ package fr.m2i.smartplanner.models;
 
 import fr.m2i.smartplanner.dtos.UserDto;
 
+
 public class JwtResponse {
 
     private UserDto user;
     private String jwToken;
 
+    public JwtResponse() {
+    }
     public JwtResponse(UserDto user, String jwToken) {
         this.user = user;
         this.jwToken = jwToken;

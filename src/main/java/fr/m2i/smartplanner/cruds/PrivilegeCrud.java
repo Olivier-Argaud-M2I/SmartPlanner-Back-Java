@@ -2,6 +2,7 @@ package fr.m2i.smartplanner.cruds;
 
 
 import fr.m2i.smartplanner.models.Privilege;
+import fr.m2i.smartplanner.services.ConnectionService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,7 +15,7 @@ public class PrivilegeCrud {
     private EntityManagerFactory factory;
 
     public PrivilegeCrud(){
-        this.factory = Persistence.createEntityManagerFactory("smartplanner");
+        this.factory = this.factory = ConnectionService.getFatcory();
     }
 
     public List<Privilege> getPrivileges(){

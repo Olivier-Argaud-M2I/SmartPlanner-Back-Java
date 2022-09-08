@@ -2,6 +2,7 @@ package fr.m2i.smartplanner.cruds;
 
 
 import fr.m2i.smartplanner.models.User;
+import fr.m2i.smartplanner.services.ConnectionService;
 import fr.m2i.smartplanner.utils.Encrypt;
 
 import javax.persistence.EntityManager;
@@ -15,7 +16,7 @@ public class UserCrud {
     private EntityManagerFactory factory;
 
     public UserCrud(){
-        this.factory = Persistence.createEntityManagerFactory("smartplanner");
+        this.factory = this.factory = ConnectionService.getFatcory();
     }
 
 

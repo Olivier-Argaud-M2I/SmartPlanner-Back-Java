@@ -1,6 +1,7 @@
 package fr.m2i.smartplanner.cruds;
 
 import fr.m2i.smartplanner.models.Events;
+import fr.m2i.smartplanner.services.ConnectionService;
 import fr.m2i.smartplanner.utils.DateManipulation;
 
 import javax.persistence.EntityManager;
@@ -15,7 +16,7 @@ public class EventsCrud {
     private EntityManagerFactory factory;
 
     public EventsCrud(){
-        this.factory = Persistence.createEntityManagerFactory("smartplanner");
+        this.factory = this.factory = ConnectionService.getFatcory();
     }
 
     public List<Events> getEvents(){

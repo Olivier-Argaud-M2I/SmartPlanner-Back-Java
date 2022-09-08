@@ -3,6 +3,7 @@ package fr.m2i.smartplanner.cruds;
 
 import fr.m2i.smartplanner.models.Contact;
 import fr.m2i.smartplanner.models.User;
+import fr.m2i.smartplanner.services.ConnectionService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,7 +17,7 @@ public class ContactCrud {
     private EntityManagerFactory factory;
 
     public ContactCrud(){
-        this.factory = Persistence.createEntityManagerFactory("smartplanner");
+        this.factory = this.factory = ConnectionService.getFatcory();
     }
 
     public List<Contact> getContacts(Integer id){

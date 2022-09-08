@@ -18,7 +18,7 @@ public class JwtService{
 
 
     public JwtResponse createJwtToken(User user) throws Exception {
-        String newGeneratedToken = jwtUtil.generateToken(user);
+        String newGeneratedToken = jwtUtil.generateToken(user,jwtUtil.getDateNow(),jwtUtil.getDatePlusValidity());
         return new JwtResponse(new UserDto(user), newGeneratedToken);
     }
 

@@ -3,6 +3,7 @@ package fr.m2i.smartplanner.cruds;
 
 import fr.m2i.smartplanner.models.Role;
 import fr.m2i.smartplanner.models.User;
+import fr.m2i.smartplanner.services.ConnectionService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +16,7 @@ public class RoleCrud {
     private EntityManagerFactory factory;
 
     public RoleCrud(){
-        this.factory = Persistence.createEntityManagerFactory("smartplanner");
+        this.factory = this.factory = ConnectionService.getFatcory();
     }
 
     public List<Role> getRoles(){

@@ -43,16 +43,24 @@ public class JwtUtil {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    public String generateToken(User user) {
+    public String generateToken(User user,Date dateNow,Date dateValidity) {
 
         Map<String, Object> claims = new HashMap<>();
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(user.getUserName())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
+                .setIssuedAt(dateNow)
+                .setExpiration(dateValidity)
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
+    }
+
+    public Date getDateNow(){
+        return new Date(System.currentTimeMillis());
+    }
+
+    public Date getDatePlusValidity(){
+        return new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000);
     }
 }

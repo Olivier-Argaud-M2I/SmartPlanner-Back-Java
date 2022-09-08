@@ -3,6 +3,7 @@ package fr.m2i.smartplanner.cruds;
 
 import fr.m2i.smartplanner.models.CalendarPrivilege;
 import fr.m2i.smartplanner.models.Privilege;
+import fr.m2i.smartplanner.services.ConnectionService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,8 +15,11 @@ public class CalendarPrivilegeCrud {
 
     private EntityManagerFactory factory;
 
+//    public CalendarPrivilegeCrud(){
+//        this.factory = Persistence.createEntityManagerFactory("smartplanner");
+//    }
     public CalendarPrivilegeCrud(){
-        this.factory = Persistence.createEntityManagerFactory("smartplanner");
+        this.factory = ConnectionService.getFatcory();
     }
 
     public List<CalendarPrivilege> getCalendarPrivileges(){
