@@ -183,4 +183,26 @@ public class EventsCrud {
         return events;
     }
 
+    public List<Events> getEventsByTimeRangeAndUserId(Long tms1,Long tms2,Integer userId){
+
+        EntityManager em = factory.createEntityManager();
+
+        DateManipulation dm = new DateManipulation();
+
+        ArrayList<Long> timeRange = new ArrayList<>();
+        timeRange.add(tms1);timeRange.add(tms2);
+
+        List<Events> events = em.createNamedQuery("selectAllEventsByTimeRangeAndUserId")
+                .setParameter("tms1",timeRange.get(0)).setParameter("tms2",timeRange.get(1))
+                .setParameter("idUser",userId)
+                .getResultList();
+        em.close();
+
+        return events;
+
+    }
+
 }
+
+// select * from events where date_debut_timestamp between :tms1 and :tms2 || date_fin_timestamp
+// between :tms1 and :tms2

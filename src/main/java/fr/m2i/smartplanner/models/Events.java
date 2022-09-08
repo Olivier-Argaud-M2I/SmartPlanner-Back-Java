@@ -10,7 +10,8 @@ import javax.persistence.*;
         @NamedQuery(name="findEventById", query="SELECT event FROM Events event WHERE id=:id ORDER BY date_debut_timestamp DESC"),
         @NamedQuery(name="selectAllEventsByUserId", query="SELECT event FROM Events event WHERE user_id=:idUser ORDER BY date_debut_timestamp"),
         @NamedQuery(name="selectAllEventsByDay", query="SELECT event FROM Events event WHERE date_debut_timestamp BETWEEN :timestamp1 AND :timestamp2 ORDER BY date_debut_timestamp ASC"),
-        @NamedQuery(name="selectAllEventsByRangeAndUserId", query="SELECT event FROM Events event WHERE user_id=:idUser AND date_debut_timestamp BETWEEN :timestamp1 AND :timestamp2 ORDER BY date_debut_timestamp ASC")
+        @NamedQuery(name="selectAllEventsByRangeAndUserId", query="SELECT event FROM Events event WHERE user_id=:idUser AND date_debut_timestamp BETWEEN :timestamp1 AND :timestamp2 ORDER BY date_debut_timestamp ASC"),
+        @NamedQuery(name="selectAllEventsByTimeRangeAndUserId", query="SELECT event FROM Events event WHERE user_id=:idUser AND ((date_debut_timestamp BETWEEN :tms1+1 AND :tms2-1) OR (date_fin_timestamp BETWEEN :tms1+1 AND :tms2-1))")
 })
 public class Events {
 

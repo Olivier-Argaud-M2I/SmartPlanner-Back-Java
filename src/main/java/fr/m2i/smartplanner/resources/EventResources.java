@@ -140,4 +140,19 @@ public class EventResources {
         return null;
     }
 
+    @GET
+    @Path("/allByTimeRangeAndUserId/{id}/{timestamp1}/{timestamp2}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Events> getEventsByTimeRangeAndUserId(@PathParam("timestamp1")Long timestamp1,
+                                                  @PathParam("timestamp2")Long timestamp2,
+                                                  @PathParam("id")Integer id,
+                                                  @Context HttpServletRequest request) throws ParseException {
+        User user1 = (User)request.getAttribute("user");
+        if(user1.hasPrivilege("cruduser")){
+            EventsCrud eventsCrud = new EventsCrud();
+            return eventsCrud.getEventsByTimeRangeAndUserId(timestamp1,timestamp2,id);
+        }
+        return null;
+    }
+
 }
