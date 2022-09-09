@@ -1,4 +1,4 @@
-package fr.m2i.smartplanner.filters;
+package filters;
 
 
 import javax.servlet.*;

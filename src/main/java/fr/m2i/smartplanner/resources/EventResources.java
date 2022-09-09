@@ -58,7 +58,7 @@ public class EventResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Events createEvent(Events events, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("userRead")){
             EventsCrud eventsCrud = new EventsCrud();
             return eventsCrud.createEvent(events);
         }
@@ -71,7 +71,7 @@ public class EventResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Events updateEvent(Events events, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("userRead")){
             EventsCrud eventsCrud = new EventsCrud();
             return eventsCrud.updateEvent(events);
         }
@@ -83,7 +83,7 @@ public class EventResources {
     @Path("/delete/{id}")
     public void deleteEvent(@PathParam("id")int id, @Context HttpServletRequest request){
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("userRead")){
             EventsCrud eventsCrud = new EventsCrud();
             eventsCrud.deleteEventById(id);
         }
@@ -115,7 +115,7 @@ public class EventResources {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Events> getEventsByDay(@PathParam("timestamp")Long timestamp, @Context HttpServletRequest request) throws ParseException {
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("userRead")){
             EventsCrud eventsCrud = new EventsCrud();
             return eventsCrud.getEventsByDay(timestamp);
         }
@@ -193,7 +193,7 @@ public class EventResources {
                                                   @PathParam("id")Integer id,
                                                   @Context HttpServletRequest request) throws ParseException {
         User user1 = (User)request.getAttribute("user");
-        if(user1.hasPrivilege("cruduser")){
+        if(user1.hasPrivilege("userRead")){
             EventsCrud eventsCrud = new EventsCrud();
             return eventsCrud.getEventsByTimeRangeAndUserId(timestamp1,timestamp2,id);
         }

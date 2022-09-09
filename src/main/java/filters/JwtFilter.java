@@ -1,4 +1,4 @@
-package fr.m2i.smartplanner.filters;
+package filters;
 
 
 import fr.m2i.smartplanner.cruds.CalendarPrivilegeCrud;
@@ -19,45 +19,48 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.*;
 
-@WebFilter({"/api/calendarPrivileges/*","/api/contacts/*","/api/events/*","/api/privileges/*","/api/roles/*","/api/users/*"})
+@WebFilter({
+                "/api/calendarPrivileges/*",
+                "/api/contacts/*",
+                "/api/events/*",
+                "/api/privileges/*",
+                "/api/roles/*",
+                "/api/users/*"
+        })
 public class JwtFilter implements Filter {
-    public void init(FilterConfig config) throws ServletException {
-    }
 
-    public void destroy() {
-    }
+    public void init(FilterConfig config) throws ServletException {}
+    public void destroy() {}
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
+    public void doFilter(
+            ServletRequest request,
+            ServletResponse response,
+            FilterChain chain
+    ) throws ServletException, IOException {
 
-
-//        List<String>headers = new ArrayList<>();
-////        Enumeration<String> enumeration  =((HttpServletRequest)request).getHeaderNames();
-////        while (enumeration.hasMoreElements()){
-////            headers.add(enumeration.nextElement());
-////        }
-////        System.out.println(headers);
-
+        // on essaie de récupérer l'utilisateur qui a émi la requète
         try{
-
+            // recupération du token depuis les headers
             String authorization = ((HttpServletRequest)request).getHeader("authorization");
             String token = authorization.substring("Bearer ".length());
 
             JwtUtil jwtUtil = new JwtUtil();
 
+            // on extrait le nom de l'utilisateur du token
             String username = jwtUtil.getUsernameFromToken(token);
 
             UserCrud userCrud = new UserCrud();
 
             User user = userCrud.getUserByName(username);
 
+            // on renvoi l'utilisateur complet en attribut de requete
             request.setAttribute("user",user);
-
         }
+        // il l'on arrive pas a récupérer l'utilisateur, on interrompt la requete
         catch(Exception e){
             return;
         }
-
 
         chain.doFilter(request, response);
     }
